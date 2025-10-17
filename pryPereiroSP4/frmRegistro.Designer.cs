@@ -35,6 +35,7 @@
             colBebidasSinAlcohol = new DataGridViewTextBoxColumn();
             colBebidasConAlcohol = new DataGridViewTextBoxColumn();
             colPostres = new DataGridViewTextBoxColumn();
+            btnValidar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvResistro).BeginInit();
             SuspendLayout();
             // 
@@ -76,11 +77,22 @@
             colPostres.HeaderText = "Postres";
             colPostres.Name = "colPostres";
             // 
+            // btnValidar
+            // 
+            btnValidar.Location = new Point(393, 287);
+            btnValidar.Name = "btnValidar";
+            btnValidar.Size = new Size(123, 48);
+            btnValidar.TabIndex = 1;
+            btnValidar.Text = "Validar";
+            btnValidar.UseVisualStyleBackColor = true;
+            btnValidar.Click += btnValidar_Click;
+            // 
             // frmRegistro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(530, 392);
+            Controls.Add(btnValidar);
             Controls.Add(dgvResistro);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmRegistro";
@@ -99,5 +111,6 @@
         private DataGridViewTextBoxColumn colBebidasSinAlcohol;
         private DataGridViewTextBoxColumn colBebidasConAlcohol;
         private DataGridViewTextBoxColumn colPostres;
+        private Button btnValidar;
     }
 }

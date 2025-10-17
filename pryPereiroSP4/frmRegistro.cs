@@ -7,6 +7,8 @@ namespace pryPereiroSP4
             InitializeComponent();
         }
 
+        float[,] vecVentas = new float[5, 4];
+
         private void frmRegistro_Load(object sender, EventArgs e)
         {
             dgvResistro.Rows.Add("Julio");
@@ -20,11 +22,44 @@ namespace pryPereiroSP4
             dgvResistro.Rows[2].Cells[0].Style.BackColor = Color.LightGray;
             dgvResistro.Rows[3].Cells[0].Style.BackColor = Color.LightGray;
             dgvResistro.Rows[4].Cells[0].Style.BackColor = Color.LightGray;
+
+            dgvResistro.Rows[0].Cells[0].Selected = true;
+            dgvResistro.Rows[0].Cells[1].Selected = false;
+
         }
 
         private void dgvResistro_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+
+        }
+
+        private void btnValidar_Click(object sender, EventArgs e)
+        {
+            for (int indiceFila = 0; indiceFila < dgvResistro.Rows.Count; indiceFila++)
+            {
+                for(int indiceColumna = 1; indiceColumna < dgvResistro.Rows.Count; indiceColumna++)
+                {
+                    var valorCelda = dgvResistro.Rows[indiceFila].Cells[indiceColumna].Value;
+
+                    if (valorCelda == null || string.IsNullOrWhiteSpace(valorCelda.ToString()))
+                    {
+                        dgvResistro.Rows[indiceFila].Cells[indiceColumna].Value = "no";
+                    }
+                    else
+                    {
+                        if (float.TryParse(valorCelda.ToString(), out float contenidoCelda))
+                        {
+                           
+                            dgvResistro.Rows[indiceFila].Cells[indiceColumna].Value = "si";
+                        }
+                        else
+                        {
+                            dgvResistro.Rows[indiceFila].Cells[indiceColumna].Value = "no";
+                        }
+
+                    }
+                }
+            }
         }
     }
 }
