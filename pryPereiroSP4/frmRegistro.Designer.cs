@@ -47,7 +47,7 @@
             dgvResistro.Location = new Point(12, 12);
             dgvResistro.Name = "dgvResistro";
             dgvResistro.RowHeadersVisible = false;
-            dgvResistro.Size = new Size(506, 269);
+            dgvResistro.Size = new Size(504, 269);
             dgvResistro.TabIndex = 0;
             dgvResistro.CellContentClick += dgvResistro_CellContentClick;
             // 
@@ -80,7 +80,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(528, 392);
+            ClientSize = new Size(530, 392);
             Controls.Add(dgvResistro);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmRegistro";
