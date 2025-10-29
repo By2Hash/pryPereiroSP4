@@ -39,8 +39,9 @@
             btnLimpiar = new Button();
             lblConsulta = new Label();
             button1 = new Button();
-            lblMozoDelDia = new Button();
+            btnMozoDelDia = new Button();
             lblRespuestaMozos = new Label();
+            btnGuardar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvResistro).BeginInit();
             SuspendLayout();
             // 
@@ -50,12 +51,11 @@
             dgvResistro.AllowUserToAddRows = false;
             dgvResistro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvResistro.Columns.AddRange(new DataGridViewColumn[] { colMozos, colComidas, colBebidasSinAlcohol, colBebidasConAlcohol, colPostres });
-            dgvResistro.Location = new Point(17, 20);
-            dgvResistro.Margin = new Padding(4, 5, 4, 5);
+            dgvResistro.Location = new Point(12, 12);
             dgvResistro.Name = "dgvResistro";
             dgvResistro.RowHeadersVisible = false;
             dgvResistro.RowHeadersWidth = 62;
-            dgvResistro.Size = new Size(720, 350);
+            dgvResistro.Size = new Size(504, 210);
             dgvResistro.TabIndex = 0;
             dgvResistro.CellContentClick += dgvResistro_CellContentClick;
             // 
@@ -96,10 +96,9 @@
             // 
             // btnValidar
             // 
-            btnValidar.Location = new Point(594, 380);
-            btnValidar.Margin = new Padding(4, 5, 4, 5);
+            btnValidar.Location = new Point(330, 230);
             btnValidar.Name = "btnValidar";
-            btnValidar.Size = new Size(143, 45);
+            btnValidar.Size = new Size(100, 27);
             btnValidar.TabIndex = 1;
             btnValidar.Text = "Validar Datos";
             btnValidar.UseVisualStyleBackColor = true;
@@ -107,9 +106,10 @@
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(452, 380);
+            btnLimpiar.Location = new Point(12, 227);
+            btnLimpiar.Margin = new Padding(2);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(126, 45);
+            btnLimpiar.Size = new Size(88, 27);
             btnLimpiar.TabIndex = 2;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
@@ -118,47 +118,62 @@
             // lblConsulta
             // 
             lblConsulta.AutoSize = true;
-            lblConsulta.Location = new Point(10, 433);
+            lblConsulta.Location = new Point(7, 260);
+            lblConsulta.Margin = new Padding(2, 0, 2, 0);
             lblConsulta.Name = "lblConsulta";
-            lblConsulta.Size = new Size(734, 25);
+            lblConsulta.Size = new Size(489, 15);
             lblConsulta.TabIndex = 4;
             lblConsulta.Text = "- - - - - - - - - - - - - - - - - - - - - - - - - - - Consulta - - - - - - - - - - - - - - - - - - - - - - - - - - - ";
             // 
             // button1
             // 
-            button1.Location = new Point(594, 533);
+            button1.Location = new Point(418, 332);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
-            button1.Size = new Size(143, 45);
+            button1.Size = new Size(100, 27);
             button1.TabIndex = 5;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
             // 
-            // lblMozoDelDia
+            // btnMozoDelDia
             // 
-            lblMozoDelDia.Location = new Point(452, 533);
-            lblMozoDelDia.Name = "lblMozoDelDia";
-            lblMozoDelDia.Size = new Size(126, 45);
-            lblMozoDelDia.TabIndex = 6;
-            lblMozoDelDia.Text = "Mozo del día";
-            lblMozoDelDia.UseVisualStyleBackColor = true;
-            lblMozoDelDia.Click += lblMozoDelDia_Click;
+            btnMozoDelDia.Location = new Point(324, 332);
+            btnMozoDelDia.Margin = new Padding(2);
+            btnMozoDelDia.Name = "btnMozoDelDia";
+            btnMozoDelDia.Size = new Size(88, 27);
+            btnMozoDelDia.TabIndex = 6;
+            btnMozoDelDia.Text = "Mozo del día";
+            btnMozoDelDia.UseVisualStyleBackColor = true;
+            btnMozoDelDia.Click += btnMozoDelDia_Click;
             // 
             // lblRespuestaMozos
             // 
-            lblRespuestaMozos.Location = new Point(17, 476);
+            lblRespuestaMozos.Location = new Point(12, 275);
+            lblRespuestaMozos.Margin = new Padding(2, 0, 2, 0);
             lblRespuestaMozos.Name = "lblRespuestaMozos";
-            lblRespuestaMozos.Size = new Size(720, 54);
+            lblRespuestaMozos.Size = new Size(504, 55);
             lblRespuestaMozos.TabIndex = 7;
+            // 
+            // btnGuardar
+            // 
+            btnGuardar.Location = new Point(436, 230);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(75, 27);
+            btnGuardar.TabIndex = 8;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // frmRegistro
             // 
-            AcceptButton = btnValidar;
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AcceptButton = btnGuardar;
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(756, 616);
+            ClientSize = new Size(529, 370);
+            Controls.Add(btnGuardar);
             Controls.Add(lblRespuestaMozos);
-            Controls.Add(lblMozoDelDia);
+            Controls.Add(btnMozoDelDia);
             Controls.Add(button1);
             Controls.Add(lblConsulta);
             Controls.Add(btnLimpiar);
@@ -166,7 +181,6 @@
             Controls.Add(dgvResistro);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 5, 4, 5);
             Name = "frmRegistro";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "La Turca - Registro de venta";
@@ -188,7 +202,8 @@
         private Button btnLimpiar;
         private Label lblConsulta;
         private Button button1;
-        private Button lblMozoDelDia;
+        private Button btnMozoDelDia;
         private Label lblRespuestaMozos;
+        private Button btnGuardar;
     }
 }

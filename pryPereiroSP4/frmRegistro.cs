@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace pryPereiroSP4
@@ -19,10 +20,15 @@ namespace pryPereiroSP4
 
 
             dgvResistro.Rows.Add("Julio");
+            dgvResistro.Rows[0].Cells[0].ReadOnly = true;
             dgvResistro.Rows.Add("Esteban");
+            dgvResistro.Rows[1].Cells[0].ReadOnly = true;
             dgvResistro.Rows.Add("Javier");
+            dgvResistro.Rows[2].Cells[0].ReadOnly = true;
             dgvResistro.Rows.Add("Gonzalo");
+            dgvResistro.Rows[3].Cells[0].ReadOnly = true;
             dgvResistro.Rows.Add("Alberto");
+            dgvResistro.Rows[4].Cells[0].ReadOnly = true;
 
 
 
@@ -71,7 +77,7 @@ namespace pryPereiroSP4
 
                 }
             }
-            MessageBox.Show("Algunos datos ingresados, son incorrectos");
+            
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -105,20 +111,52 @@ namespace pryPereiroSP4
             }
         }
 
-        private void lblMozoDelDia_Click(object sender, EventArgs e)
-        {
-            int majorventa = 0;
-            string mozo;
+        string mozo = "";
+        string categoria = "";
 
-            for(int iFila = 0; iFila < dgvResistro.Rows.Count; iFila++)
+        int mayorVenta = 0;
+
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+         
+            const int COLUMNA_INICIO_VENTAS = 1;
+            const int COLUMNA_NOMBRE = 0;
+
+            for (int fila = 0; fila < dgvResistro.RowCount; fila++)
             {
-                for(int iColumna = 0; iColumna < dgvResistro.Rows.Count; iColumna++)
+                for(int columna = COLUMNA_INICIO_VENTAS; columna < dgvResistro.ColumnCount; columna++)
                 {
-                    majorventa = dgvResistro.Rows.Count;
+                    if (dgvResistro.Rows[fila].Cells[columna].Value != null)
+                    {
+                        if(int.TryParse(dgvResistro.Rows[fila].Cells[columna].Value.ToString(), out int ventaActual))
+                        {
+                            if(ventaActual > mayorVenta)
+                            { 
+                                mayorVenta = ventaActual;
+                            }
+                            var nombreCelda = dgvResistro.Rows[fila].Cells[COLUMNA_NOMBRE].Value;
+                            if(nombreCelda != null)
+                            {
+                                    mozo = nombreCelda.ToString();
+                                    categoria = dgvResistro.Columns[columna].HeaderText;
+                            }
+                        }
+                    }
+
                 }
             }
-            
+        }
+        private void btnMozoDelDia_Click(object sender, EventArgs e)
+        {
+
+            lblRespuestaMozos.Text = "";
+            lblRespuestaMozos.Text = ($"Mozo del dia:¨{mozo}");
+            lblRespuestaMozos.Text = ($"Mayor venta:¨{mayorVenta}");
+
         }
     }
+
+    
 
 }
