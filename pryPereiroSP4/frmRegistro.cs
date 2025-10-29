@@ -9,115 +9,96 @@ namespace pryPereiroSP4
             InitializeComponent();
         }
 
-        float[,] vecVentas = new float[5, 4];
-
+        int[,] ventasGrilla = new int[5, 5];
+        int valorGrilla;
         private void frmRegistro_Load(object sender, EventArgs e)
         {
+            //Julio, Esteban, Javier, Gonzalo y Alberto.
+            dgvRegistro.Rows.Add("Julio");
+            dgvRegistro.Rows[0].Cells[0].ReadOnly = true;
+            dgvRegistro.Rows.Add("Esteban");
+            dgvRegistro.Rows[1].Cells[0].ReadOnly = true;
+            dgvRegistro.Rows.Add("Javier");
+            dgvRegistro.Rows[2].Cells[0].ReadOnly = true;
+            dgvRegistro.Rows.Add("Gonzalo");
+            dgvRegistro.Rows[3].Cells[0].ReadOnly = true;
+            dgvRegistro.Rows.Add("Alberto");
+            dgvRegistro.Rows[4].Cells[0].ReadOnly = true;
 
 
 
 
-
-            dgvResistro.Rows.Add("Julio");
-            dgvResistro.Rows.Add("Esteban");
-            dgvResistro.Rows.Add("Javier");
-            dgvResistro.Rows.Add("Gonzalo");
-            dgvResistro.Rows.Add("Alberto");
-
-
-
-            dgvResistro.Rows[0].Cells[0].Style.BackColor = Color.LightGray;
-            dgvResistro.Rows[1].Cells[0].Style.BackColor = Color.LightGray;
-            dgvResistro.Rows[2].Cells[0].Style.BackColor = Color.LightGray;
-            dgvResistro.Rows[3].Cells[0].Style.BackColor = Color.LightGray;
-            dgvResistro.Rows[4].Cells[0].Style.BackColor = Color.LightGray;
-
-            dgvResistro.Rows[0].Cells[0].Selected = true;
-            dgvResistro.Rows[0].Cells[1].Selected = false;
 
         }
 
-        private void dgvResistro_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvRegistro_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void btnValidar_Click(object sender, EventArgs e)
+
+        private void btnGuardar_Click(object sender, EventArgs e)
         {
-            for (int indiceFila = 0; indiceFila < dgvResistro.Rows.Count; indiceFila++)
+            int mayorVenta = 0;
+            string categoria = "";
+            string nombreVendedor = "";
+            const int COLUMNA_INICIO_VENTAS = 1;
+            const int COLUMNA_NOMBRE = 0;
+
+
+            for (int fila = 0; fila < dgvRegistro.RowCount; fila++)
             {
-                for (int indiceColumna = 1; indiceColumna < dgvResistro.Rows.Count; indiceColumna++)
+                for (int columna = COLUMNA_INICIO_VENTAS; columna < dgvRegistro.ColumnCount; columna++)
                 {
-                    var valorCelda = dgvResistro.Rows[indiceFila].Cells[indiceColumna].Value;
 
-                    if (valorCelda == null || string.IsNullOrWhiteSpace(valorCelda.ToString()))
+                    if (dgvRegistro.Rows[fila].Cells[columna].Value != null)
                     {
-                        dgvResistro.Rows[indiceFila].Cells[indiceColumna].Value = "no";
-                    }
-                    else
-                    {
-                        if (float.TryParse(valorCelda.ToString(), out float contenidoCelda))
+
+                        if (int.TryParse(dgvRegistro.Rows[fila].Cells[columna].Value.ToString(), out int ventaActual))
                         {
 
-                            dgvResistro.Rows[indiceFila].Cells[indiceColumna].Value = "si";
-                        }
-                        else
-                        {
-                            dgvResistro.Rows[indiceFila].Cells[indiceColumna].Value = "no";
+                            if (ventaActual > mayorVenta)
+                            {
 
-                        }
+                                mayorVenta = ventaActual;
 
+
+                                var nombreCelda = dgvRegistro.Rows[fila].Cells[COLUMNA_NOMBRE].Value;
+                                if (nombreCelda != null)
+                                {
+                                    nombreVendedor = nombreCelda.ToString();
+
+                                }
+                                categoria = dgvRegistro.Columns[columna].HeaderText;
+                            }
+                        }
                     }
 
                 }
             }
-            MessageBox.Show("Algunos datos ingresados, son incorrectos");
+
+
+            if (mayorVenta > 0)
+            {
+                MessageBox.Show($"La mayor venta fue de ${mayorVenta} en la categoría: {categoria}, realizada por: {nombreVendedor}",
+                        "Mayor Venta Encontrada");
+
+            }
+            else
+            {
+                MessageBox.Show("No se encontraron ventas válidas en la grilla.", "Atención");
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            for (int indiceFila = 0; indiceFila < dgvResistro.Rows.Count; indiceFila++)
+            for(int fila = 0; fila < dgvRegistro.RowCount;fila++)
             {
-                for (int indiceColumna = 1; indiceColumna < dgvResistro.Rows.Count; indiceColumna++)
+                for(int columna = 1; columna < dgvRegistro.ColumnCount; columna++)
                 {
-                    var valorCelda = dgvResistro.Rows[indiceFila].Cells[indiceColumna].Value;
-
-                    if (valorCelda == null || string.IsNullOrWhiteSpace(valorCelda.ToString()))
-                    {
-                        dgvResistro.Rows[indiceFila].Cells[indiceColumna].Value = "";
-                    }
-                    else
-                    {
-                        if (float.TryParse(valorCelda.ToString(), out float contenidoCelda))
-                        {
-
-                            dgvResistro.Rows[indiceFila].Cells[indiceColumna].Value = "";
-                        }
-                        else
-                        {
-                            dgvResistro.Rows[indiceFila].Cells[indiceColumna].Value = "";
-
-                        }
-
-                    }
-
+                    dgvRegistro.Rows[fila].Cells[columna].Value = "";
                 }
             }
-        }
-
-        private void lblMozoDelDia_Click(object sender, EventArgs e)
-        {
-            int majorventa = 0;
-            string mozo;
-
-            for(int iFila = 0; iFila < dgvResistro.Rows.Count; iFila++)
-            {
-                for(int iColumna = 0; iColumna < dgvResistro.Rows.Count; iColumna++)
-                {
-                    majorventa = dgvResistro.Rows.Count;
-                }
-            }
-            
         }
     }
 
